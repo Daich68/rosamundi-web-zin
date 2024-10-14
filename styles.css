@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&display=swap');
+
+:not(:defined) > * {
+  display: none;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  user-select: none; /* Запрещает выделение текста */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1vw;
+}
+
+model-viewer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: fixed;
+  top: 0;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  --poster-color: transparent;
+  z-index: 2;
+  /* background-image: linear-gradient(to top, #dbdcd7 0%, #dddcd7 24%, #e2c9cc 30%, #e7627d 46%, #b8235a 59%, #801357 71%, #3d1635 84%, #1c1a27 100%); */
+  background-size: cover;
+}
+
+
+@keyframes circle {
+  from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+}
+
+@keyframes elongate {
+  from { transform: translateX(100px); }
+  to   { transform: translateX(-100px); }
+}
+
+model-viewer > #ar-prompt {
+  position: absolute;
+  left: 50%;
+  bottom: 60px;
+  animation: elongate 2s infinite ease-in-out alternate;
+  display: none;
+}
+
+model-viewer[ar-status="session-started"] > #ar-prompt {
+  display: block;
+}
+
+model-viewer > #ar-prompt > img {
+  animation: circle 4s linear infinite;
+}
+
+h1{
+  z-index: 1001;
+  color: #E8EAED;
+  position: fixed;
+  font-family: 'Edu AU VIC WA NT Guides', sans-serif;
+  font-weight: 400; /* Например, можно задать полужирный */
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%) skew(-5deg);
+}
+
+@media only screen and (max-width: 768px) {
+  h1 {
+    z-index: 1001;
+    color: #E8EAED;
+    position: fixed;
+    font-family: 'Edu AU VIC WA NT Guides', sans-serif;
+    font-weight: 400;
+    top: 10%;
+    font-size: 8em;
+    scale: 1;
+    white-space: nowrap;
+  }
+
+  .wrapper-li {
+    left: 50% !important; /* Для отладки, временно используйте !important */
+    top: 50% !important;
+    transform: translate(-50%, -50%) skew(-5deg)!important;
+    z-index: 999 !important;
+    color: #E8EAED !important;
+    background-color: #181818a1 !important;
+    width: 90% !important;
+    position: fixed !important;
+    font-family: 'Edu AU VIC WA NT Guides', sans-serif !important;
+    border-radius: 0.5em !important;
+    padding: 1em !important;
+    font-size: 3em!important;
+  }
+
+  .custom-audio-player {
+    display: none !important;
+  }
+  
+  .play-btn, .mute-btn {
+    z-index: 1001 !important;
+    background-color: #222 !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 5em !important;
+    padding: 0.52em 1.04em !important;
+    cursor: pointer !important;
+    border-radius: 2.6em !important;
+    margin: 0 0.52em !important;
+    transition: background-color 0.3s !important;
+    font-family: monospace !important;
+  }
+  
+}
+
+.wrapper-li {
+  left: 5em;
+  top: 10em;
+  transform:skew(-5deg); /* Сдвиг на 50% по осям X и Y для центрирования, наклон на -5 градусов */
+  z-index: 999;
+  color: #E8EAED;
+  background-color: #181818a1;
+  width: 30%;
+  position: fixed;
+  font-family: 'Edu AU VIC WA NT Guides', sans-serif;
+  font-weight: 200; /* Например, можно задать полужирный */
+  /* background-color: rgba(0, 0, 0, 0.7);  */
+  border-radius: 0.5em; /* Закругление углов */
+  padding: 1em; /* Внутренний отступ */
+}
+
+.wrapper-li li {
+  list-style: none; /* Убираем маркеры списка */
+  margin: 0.25em 0; 
+
+  transition: background-color 0.3s; /* Плавный переход для фона */
+}
+
+.wrapper-li li:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Изменение фона при наведении */
+}
+li{
+  z-index: 1001;
+  color: #E8EAED;
+}
+
+
+.custom-audio-player {
+  z-index: 1001;
+  position: fixed; /* Фиксированное положение */
+  bottom: 8em; /* Установка кнопок внизу экрана */
+  left: 20em; /* Горизонтальное центрирование */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e2e2e2d7;
+  color: #fff;
+  padding: 1.04em; /* 20px ÷ 19.2 */
+  border-radius: 0.52em; /* 10px ÷ 19.2 */
+  width: 10.42em; /* 200px ÷ 19.2 */
+  margin: 1.04em auto; /* 20px ÷ 19.2 */
+  transform: rotate(-5deg) skew(-5deg);
+  mix-blend-mode: difference;
+}
+
+.play-btn, .mute-btn {
+  z-index: 1001;
+  background-color: #222;
+  border: none;
+  color: #fff;
+  font-size: 0.83em; /* 16px ÷ 19.2 */
+  padding: 0.52em 1.04em; /* 10px ÷ 19.2 и 20px ÷ 19.2 */
+  cursor: pointer;
+  border-radius: 2.6em; /* 50px ÷ 19.2 */
+  margin: 0 0.52em; /* 10px ÷ 19.2 */
+  transition: background-color 0.3s;
+  font-family: monospace;
+}
+
+.play-btn:hover, .mute-btn:hover {
+  background-color: #444;
+}
+
+
+.popup {
+  
+  display: none; 
+  font-family: monospace;
+  font-weight: 200; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  text-align: left;
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+    transform: rotate(0deg); 
+}
+
+.popup-content {
+  font-weight: 200; 
+  z-index: 1000;
+  text-align: left;
+  background-color: #202020d2;
+  padding: 3em;
+  border-radius: 2em;
+  color: white;
+  text-align: center;
+  /* width: 25%; */
+  height: auto;
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  overflow-x: visible; 
+  white-space: nowrap;
+  width: auto;
+}
+
+#popup-text {
+  white-space: pre-wrap;
+  overflow-x: visible; 
+}
+
+#poem-list {
+  display: grid; /* Динамическая сетка */
+  grid-template-columns: repeat(2, 1fr); /* Две колонки */
+  gap: 1em 1em; /* Первое значение — горизонтальный отступ, второе — вертикальный */
+  margin: 0 auto; /* Центрируем по горизонтали */
+  padding: 0.1em;
+  z-index: -1;
+}
+
+.poem-container {
+  z-index: 1;
+  position: relative;
+  display: flex; /* Горизонтальное выравнивание элементов */
+  gap: 0.1em; /* Отступы между текстом, символом и информацией */
+  align-items: center; /* Вертикальное выравнивание по центру */
+}
+
+.poem-item:hover {
+  transform: scale(1.05); /* Легкое увеличение при наведении */
+  cursor: pointer;
+}
+
+
