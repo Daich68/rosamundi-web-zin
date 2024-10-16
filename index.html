@@ -3,7 +3,7 @@
   <head>
     <title>&lt;rosamundi 〔✛〕 web-zin&gt;</title>
     <meta charset="utf-8">
-    <meta name="description" content="&lt;poetic&gt; web-zin">
+    <meta name="description" content="&lt;model-viewer&gt; template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" href="./styles.css" rel="stylesheet"/>
     <meta name="Cache-Control" content="max-age=31536000, must-revalidate">
@@ -17,7 +17,6 @@
 
   <!-- Поддержка Safari для import maps -->
 <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
-
 <!-- Подключаем Three.js -->
 <script type="importmap">
 {
@@ -31,88 +30,26 @@
 <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer-module.min.js"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js"></script>
 
-
   <body>
     <div class="wrapper-h1"><h1>rosamundi 〔✛〕 web-zin</h1></div>
     
-    <div class="wrapper-li">
+    <div class="wrapper-li" id="draggable-element">
       <ul id="poem-list"></ul>
     </div>
+    
     
     <div id="popup" class="popup">
       <div class="popup-content"> 
           <p id="popup-text"></p>
       </div>
     </div>
+
+    <div class="custom-audio-player" id="draggable-audio-player">
+      <button id="playPauseBtn" class="play-btn">Play</button>
+      <button id="muteBtn" class="mute-btn">Mute</button>
+  </div>
     
-    <script>
-      fetch('poems.json')
-        .then(response => response.json())
-        .then(data => {
-          const poemList = document.getElementById('poem-list');
-    
-          data.poems.forEach(poem => {
-            const li = document.createElement('li');
-            li.classList.add('poem-item'); // Добавляем класс для стилей
-    
-            // Создаем контейнер для информации о поэме
-            const poemContainer = document.createElement('div');
-            poemContainer.classList.add('poem-container'); // Добавляем класс для оформления
-    
-            // Текст "poem"
-            const poemText = document.createElement('span');
-            poemText.textContent = `poem`;
-            poemText.className = 'poem-text';
-            poemContainer.appendChild(poemText);
-    
-            // Символ "〔✛〕"
-            const poemSymbol = document.createElement('span');
-            poemSymbol.textContent = `〔✛〕`;
-            poemSymbol.className = 'poem-symbol';
-            poemContainer.appendChild(poemSymbol);
-    
-            // Информация о поэме: ID и автор
-            const poemInfo = document.createElement('span');
-            poemInfo.textContent = `${poem.id} ${poem.author}`;
-            poemInfo.className = 'poem-info';
-            poemContainer.appendChild(poemInfo);
-    
-            // Вставляем контейнер в элемент списка
-            li.appendChild(poemContainer);
-    
-            // Устанавливаем data-content для li, чтобы идентифицировать содержимое
-            li.setAttribute('data-content', poem.content);
-    
-            // Добавляем обработчик клика для открытия попапа
-            li.addEventListener('click', () => {
-              const popupText = document.getElementById('popup-text');
-              popupText.textContent = poem.content; // Показываем текст в попапе
-    
-              const popup = document.getElementById('popup');
-              const popupContent = document.querySelector('.popup-content');
-              popup.style.display = 'flex'; // Показываем попап
-    
-              // Генерируем случайный угол наклона от -5 до 5 градусов
-              const randomRotate = Math.floor(Math.random() * 11) - 5;
-              popupContent.style.transform = `rotate(${randomRotate}deg)`;
-            });
-    
-            // Вставляем элемент списка в poemList
-            poemList.appendChild(li);
-          });
-    
-          // Закрытие попапа при клике вне его области
-          window.addEventListener('click', (event) => {
-            const popup = document.getElementById('popup');
-            const popupContent = document.querySelector('.popup-content');
-    
-            if (event.target === popup) {
-              popup.style.display = 'none'; // Скрываем попап
-              popupContent.style.transform = 'rotate(0deg)'; // Сбрасываем наклон
-            }
-          });
-        });
-    </script>
+
     
     <!-- <model-viewer> HTML element -->
       <model-viewer src="dried_rose_.rawscan.glb" 
@@ -126,6 +63,8 @@
       exposure="1.21" 
       shadow-softness="0.3" 
       auto-rotate
+      camera-orbit="0deg 60deg 2.2m" 
+      camera-target="0 1.2 0" 
       style="background-color: black;">
       
       
@@ -145,17 +84,13 @@
       </div>
     </model-viewer>  
   
-    <div class="custom-audio-player">
-      <button id="playPauseBtn" class="play-btn">Play</button>
-      <button id="muteBtn" class="mute-btn">Mute</button>
-    </div>
-    
+
     <audio id="audioPlayer" src="Elephant Woman.mp3"></audio>
     
     
-    <script src="script.js"></script>
-    
     <!-- Loads <model-viewer> for browsers: -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <script src="s.js"></script>
+
   </body>
 </html>

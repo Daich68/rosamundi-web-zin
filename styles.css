@@ -86,7 +86,7 @@ h1{
   .wrapper-li {
     left: 50% !important; /* Для отладки, временно используйте !important */
     top: 50% !important;
-    transform: translate(-50%, -50%) skew(-5deg)!important;
+    transform: translate(-50%, -50%) !important;
     z-index: 999 !important;
     color: #E8EAED !important;
     background-color: #181818a1 !important;
@@ -94,8 +94,11 @@ h1{
     position: fixed !important;
     font-family: 'Edu AU VIC WA NT Guides', sans-serif !important;
     border-radius: 0.5em !important;
+    font-weight: 400 !important;
     padding: 1em !important;
-    font-size: 3em!important;
+    font-size: 3em !important;
+    font-style: italic !important;
+
   }
 
   .custom-audio-player {
@@ -115,13 +118,28 @@ h1{
     transition: background-color 0.3s !important;
     font-family: monospace !important;
   }
+
+  .popup-content {
+  font-size: 3em !important;
+  font-weight: 200 !important;
+  }
+  
   
 }
 
+.dragging {
+  cursor: grabbing; /* Change cursor to grabbing while dragging */
+}
+
+
+.wrapper-li.dragging {
+  cursor: grabbing;
+}
+
 .wrapper-li {
+  cursor: grab;
   left: 5em;
   top: 10em;
-  transform:skew(-5deg); /* Сдвиг на 50% по осям X и Y для центрирования, наклон на -5 градусов */
   z-index: 999;
   color: #E8EAED;
   background-color: #181818a1;
@@ -151,11 +169,12 @@ li{
 
 
 .custom-audio-player {
+  display: none;
   z-index: 1001;
   position: fixed; /* Фиксированное положение */
   bottom: 8em; /* Установка кнопок внизу экрана */
   left: 20em; /* Горизонтальное центрирование */
-  display: flex;
+
   align-items: center;
   justify-content: center;
   background-color: #e2e2e2d7;
